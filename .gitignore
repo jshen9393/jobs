@@ -1,0 +1,11 @@
+#virtual environment
+venv/
+
+#IDE
+.idea/
+
+#data
+jobs.db
+
+# Byte-compiled / optimized / DLL files
+__pycache__/
