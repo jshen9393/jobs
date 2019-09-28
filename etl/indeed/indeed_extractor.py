@@ -80,4 +80,4 @@ class IndeedExtractor:
                 query['start'] = end + 1
                 for result in results['results']:
                     result['query'] = params['query']
-                    print(result)
+                    yield result

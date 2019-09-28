@@ -1,8 +1,8 @@
 create table if not exists public.indeed_stage_jobs(
  	jobkey VARCHAR(30),
 	jobquery VARCHAR(50),
-	jobtitle VARCHAR(50),
-	company VARCHAR(30),
+	jobtitle VARCHAR(200),
+	company VARCHAR(200),
 	city VARCHAR(30),
 	state VARCHAR(20),
 	country VARCHAR(5),
@@ -19,6 +19,5 @@ create table if not exists public.indeed_stage_jobs(
 	indeedapply BOOLEAN,
 	formattedlocationfull VARCHAR(50),
 	formattedrelativetime VARCHAR(30),
-	stations VARCHAR(30),
-	PRIMARY KEY (jobkey,jobquery)
+	stations VARCHAR(30)
 );

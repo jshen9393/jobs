@@ -22,6 +22,13 @@ class TsvLoader:
         self.extractor = extractor
         self.transformer = transformer
 
+    def save_file(self,file):
+
+        if file is None:
+            return
+        with open("files/" + file, "w") as f:
+            f.write(file)
+
     def _get_writer(self, compression=False):
         """
         Return Python independent file writer with compression support.
@@ -39,7 +46,16 @@ class TsvLoader:
                 file_name += constants.GZIP_EXT
             file_writer = gzip.open
 
-        return file_name, file_writer(file_name, **file_writer_args)
+        return file_name, file_writer(constants.LOCAL_STORAGE+file_name, **file_writer_args)
+
+    def cleanup(self):
+        if os.path.exists(constants.LOCAL_STORAGE+self.out_file):
+            os.remove (constants.LOCAL_STORAGE+self.out_file)
+        else:
+            print("The file does not exist")
+
+    def get_file_name(self):
+        return self.out_file
 
     def load(self, *args, **kwargs):
         """
@@ -61,7 +77,7 @@ class TsvLoader:
 
         extracted_items = get_iterator_or_none(self.extractor.extract())
 
-        out_file, file_writer = self._get_writer(True)
+        out_file, file_writer = self._get_writer(False)
 
         with file_writer as tsv_file:
             writer = csv.DictWriter(
@@ -80,5 +96,4 @@ class TsvLoader:
                 # Count only correctly processed items
                 extracted_items_count += 1
 
-
-        return out_file
+        #return out_file

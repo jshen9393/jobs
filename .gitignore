@@ -11,4 +11,8 @@ jobs.db
 __pycache__/
 
 #env vars
-.env/
+.env
+
+#local processing files
+files/*
+!files/.gitkeep

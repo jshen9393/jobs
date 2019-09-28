@@ -36,8 +36,8 @@ STAGE_TABLE_DDL = """
 create table {} (
  	jobkey VARCHAR(30),
 	jobquery VARCHAR(50),
-	jobtitle VARCHAR(50),
-	company VARCHAR(30),
+	jobtitle VARCHAR(200),
+	company VARCHAR(200),
 	city VARCHAR(30),
 	state VARCHAR(20),
 	country VARCHAR(5),
@@ -45,7 +45,7 @@ create table {} (
 	longitude FLOAT,
 	language VARCHAR(5),
 	formattedlocation VARCHAR(30),
-	jobsource VARCHAR(30),
+	jobsource VARCHAR(200),
 	jobdate VARCHAR(40),
 	url VARCHAR(300),
 	onmousedown VARCHAR(30),
@@ -54,8 +54,7 @@ create table {} (
 	indeedapply BOOLEAN,
 	formattedlocationfull VARCHAR(50),
 	formattedrelativetime VARCHAR(30),
-	stations VARCHAR(30),
-	PRIMARY KEY (jobkey,jobquery)
+	stations VARCHAR(30)
 	)
 """.format(STAGE_TABLE_NAME)
 # </editor-fold>

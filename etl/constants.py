@@ -19,3 +19,4 @@ TSV_OUTPUT_TIMESTAMP = '%Y%m%d_%H%M%S'
 
 # Transform
 GZIP_EXT = '.gz'
+LOCAL_STORAGE = 'files/'

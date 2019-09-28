@@ -2,10 +2,10 @@
 Base ETL context class.
 """
 import os
+import sys
 from datetime import datetime
 import itertools
 
-from etl import config
 from etl import constants
 
 
