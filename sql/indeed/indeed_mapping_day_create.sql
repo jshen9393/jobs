@@ -1,4 +1,4 @@
-create table public.indeed_mapping_day(
+create table if not exists public.indeed_mapping_day(
 day_num int,
 day_name char(3)
 );

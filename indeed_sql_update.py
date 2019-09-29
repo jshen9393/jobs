@@ -9,7 +9,7 @@ SQL_SCRIPTS =[
 ]
 
 
-def main():
+def main(*args, **kwargs):
     for script in SQL_SCRIPTS:
         runner.exec_sql_script(script,explicit_commit=True)
         print('Finished', script)

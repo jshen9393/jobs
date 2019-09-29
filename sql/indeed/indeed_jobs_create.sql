@@ -1,4 +1,4 @@
-create table public.indeed_jobs (
+create table if not exists public.indeed_jobs (
 	job_key varchar(30) primary key,
 	job_date date,
 	job_time time,

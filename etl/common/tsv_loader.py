@@ -8,7 +8,7 @@ import gzip
 import inspect
 
 from etl import constants
-from etl.base.transformer import get_iterator_or_none, get_script_name
+from etl.utils.common import get_iterator_or_none, get_script_name
 
 
 class TsvLoader:

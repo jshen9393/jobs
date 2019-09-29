@@ -1,35 +1,9 @@
 """
 Base ETL context class.
 """
-import os
-import sys
 from datetime import datetime
-import itertools
 
 from etl import constants
-
-
-def get_iterator_or_none(iterator, empty_iterator=False):
-    """
-    Return None if empty iterator received.
-    This function created to use conditions with iterators, for ex.:
-        stream_data = get_iterator_or_none(stream_data)
-        if stream_data is None:
-            break
-    """
-    for item in iterator:
-        return itertools.chain((item,), iterator)
-
-    # return empty iterator instead of None
-    if empty_iterator:
-        return ()
-
-
-def get_script_name():
-    """
-    Get nice looking script name with stripped path and .py
-    """
-    return os.path.basename(sys.argv[0]).split('.')[0]
 
 
 class BaseTransformer:

@@ -4,7 +4,7 @@ from etl.indeed.indeed_extractor import IndeedDuration
 from etl.common.db import get_postgres
 
 
-def main():
+def main(*args, **kwargs):
 
     extractor = IndeedDuration()
 

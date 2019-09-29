@@ -1,4 +1,4 @@
-create table public.indeed_mapping_month(
+create table if not exists public.indeed_mapping_month(
 month_num char(2),
 month_name char(3)
 );
