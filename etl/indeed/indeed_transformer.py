@@ -32,8 +32,8 @@ FIELDS = (
 # </editor-fold>
 
 # <editor-fold desc='Stage table DDL'>
-STAGE_TABLE_DDL = """
-create table {} (
+STAGE_TABLE_DDL = f"""
+create table {STAGE_TABLE_NAME} (
  	jobkey VARCHAR(30),
 	jobquery VARCHAR(50),
 	jobtitle VARCHAR(200),
@@ -56,7 +56,7 @@ create table {} (
 	formattedrelativetime VARCHAR(30),
 	stations VARCHAR(30)
 	)
-""".format(STAGE_TABLE_NAME)
+"""
 # </editor-fold>
 
 

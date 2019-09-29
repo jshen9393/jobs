@@ -8,11 +8,9 @@ import json
 import requests
 import psycopg2.extras
 
-from etl.common.db import get_redshift
+from etl.common.db import get_postgres
 from etl import constants
 from etl import config
-
-
 
 
 class IndeedExtractor:
@@ -24,7 +22,7 @@ class IndeedExtractor:
 
     def _get_parameters(self):
 
-        with get_redshift() as conn:
+        with get_postgres() as conn:
             with conn.cursor(cursor_factory=psycopg2.extras.RealDictCursor) as cursor:
                 cursor.execute("""
                 SELECT * FROM public.indeed_etl_jobs where is_active = TRUE 
@@ -81,3 +79,49 @@ class IndeedExtractor:
                 for result in results['results']:
                     result['query'] = params['query']
                     yield result
+
+
+class IndeedDuration:
+
+    def _get_command(self, query):
+        indeed_url = constants.INDEED_GET_JOB
+        r = requests.get(indeed_url, params=query)
+        return json.loads(r.text)
+
+    def _get_open_jobs(self):
+
+        with get_postgres() as conn:
+            with conn.cursor(cursor_factory=psycopg2.extras.RealDictCursor) as cursor:
+                cursor.execute("""
+                select distinct job_key 
+                from public.indeed_jobs_duration
+                    where job_expired = '1900-01-01'
+                    and job_no_api = '1900-01-01'
+                """
+                               )
+                for query in cursor.fetchall():
+                    yield query
+
+    def _query_mapping(self, job_key):
+
+        query = {
+            "v": constants.INDEED_API_VERSION,
+            "format": constants.INDEED_FORMAT,
+            "jobkeys": job_key,
+            "publisher": config.INDEED_PUB_ID,
+        }
+
+        return query
+
+    def extract(self):
+        for job_key in self._get_open_jobs():
+            query = self._query_mapping(job_key['job_key'])
+            result = self._get_command(query)
+            api_active = True
+            try:
+                expired_status = result['results'][0]['expired']
+            except IndexError:
+                api_active = False
+                expired_status = False
+
+            yield job_key['job_key'], expired_status, api_active

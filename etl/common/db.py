@@ -39,9 +39,7 @@ class DbConn:
                     password=self._db_pass,
                 )
             except psycopg2.OperationalError:
-                logger.error('Failed to connect to Redshift. Attempts left %s.', retries)
                 if retries == 0:
-                    logger.critical('Failed to connect to Redshift after %s attempts. Exiting..', config.ETL_DB_RETRIES)
                     sys.exit(1)
 
                 # Get some extra progressive sleep
@@ -65,9 +63,9 @@ _DB_CONN = DbConn()
 
 
 @contextmanager
-def get_redshift():
+def get_postgres():
     """
-    Get Redshift connection
+    Get Postgres connection
     """
     conn = _DB_CONN.get_conn()
     try:
@@ -78,7 +76,7 @@ def get_redshift():
 
 def handle_error(func):
     """
-    Handle Redshift errors
+    Handle Postgres errors
     """
     @wraps(func)
     def _exec_func(*args, **kwargs):

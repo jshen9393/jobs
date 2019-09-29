@@ -11,7 +11,7 @@ import psycopg2.extras
 from etl import config
 from etl.constants import NULL_VALUE
 from etl.sql.runner import runner
-from etl.common.db import get_redshift, handle_error
+from etl.common.db import get_postgres, handle_error
 from etl import constants
 
 REDSHIFT_COPY_ERROR = """"\
@@ -39,7 +39,7 @@ class PostGresLoader:
         """
         Rebuild appropriate ETL stage table
         """
-        with get_redshift() as conn:
+        with get_postgres() as conn:
             with conn.cursor() as cursor:
                 if recreate_table:
                     cursor.execute("drop table if exists {} cascade".format(self.table_name))
@@ -54,7 +54,7 @@ class PostGresLoader:
 
     def load(self, *args, **kwargs):
 
-        with get_redshift() as conn:
+        with get_postgres() as conn:
             with conn.cursor() as cursor:
                 try:
                     with open(constants.LOCAL_STORAGE+self.file,"r") as upload_file:

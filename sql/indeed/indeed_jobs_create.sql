@@ -1,0 +1,20 @@
+create table public.indeed_jobs (
+	job_key varchar(30) primary key,
+	job_date date,
+	job_time time,
+	job_title varchar(200),
+	company varchar(200),
+	city varchar(30),
+	state varchar(20),
+	zip varchar(15),
+	country varchar(5),
+	latitude float,
+	longitude float,
+	job_source varchar(200),
+	url varchar(300),
+	on_mouse_down varchar(30),
+	sponsored boolean,
+	expired boolean,
+	indeedapply boolean,
+	stations varchar(30)
+);
