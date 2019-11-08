@@ -68,12 +68,13 @@ class IndeedExtractor:
             while total_results > end and end < 1025:
                 results = self._get_command(query)
                 total_results = results['totalResults']
+                print(end)
                 if total_results == 0:
                     print('No Results')
                     break
-                if total_results > 1025:
-                    print('Too many results')
-                    continue
+                # if total_results > 1025:
+                #     print('Too many results')
+                #     continue
                 end = results['end']
                 query['start'] = end + 1
                 for result in results['results']:

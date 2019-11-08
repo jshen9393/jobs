@@ -7,7 +7,7 @@ select distinct
 	, sj.company
 	, sj.city
 	, sj.state
-	, split_part(sj.jobdate, ' ', 3) as zip
+	, split_part(sj.formattedlocationfull, ' ', 3) as zip
 	, sj.country
 	, sj.latitude
 	, sj.longitude
@@ -18,6 +18,7 @@ select distinct
 	, sj.expired
 	, sj.indeedapply
 	, sj.stations
+	, dm.day_num
 from public.indeed_stage_jobs sj
 	join public.indeed_mapping_month mm
 	on split_part(sj.jobdate, ' ', 3) = mm.month_name

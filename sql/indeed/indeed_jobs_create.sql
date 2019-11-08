@@ -16,5 +16,6 @@ create table if not exists public.indeed_jobs (
 	sponsored boolean,
 	expired boolean,
 	indeedapply boolean,
-	stations varchar(30)
+	stations varchar(30),
+	day_num integer
 );

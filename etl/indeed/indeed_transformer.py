@@ -68,12 +68,17 @@ class IndeedTransformer(BaseTransformer):
         self._stage_table_ddl = STAGE_TABLE_DDL
         self._tsv_fields = FIELDS
 
+    @staticmethod
+    def _clean_data(doc, name):
+
+        return doc.get(name).replace('\"', '')
+
     def transform(self, doc):
 
         yield {
             'jobkey': doc.get('jobkey'),
             'jobquery': doc.get('query'),
-            'jobtitle': doc.get('jobtitle'),
+            'jobtitle': self._clean_data(doc,'jobtitle'),
             'company': doc.get('company'),
             'city': doc.get('city'),
             'state': doc.get('state'),

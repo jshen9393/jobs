@@ -37,3 +37,6 @@ values('go lang', 'charlotte', 'nc', null, null, 365, 'date', null, null, 'us', 
 
 insert into public.indeed_etl_jobs (query, city, state, zip, radius, fromage, sort, site_type, job_type, country, channel, is_active)
 values('node.js', 'charlotte', 'nc', null, null, 365, 'date', null, null, 'us', null, true);
+
+insert into public.indeed_etl_jobs (query, city, state, zip, radius, fromage, sort, site_type, job_type, country, channel, is_active)
+values('php', 'charlotte', 'nc', null, null, 365, 'date', null, null, 'us', null, true);
